@@ -117,7 +117,7 @@ class Rect : public Shape
 public:
 	Rect(double left, double top, double right, double bottom) : Shape(), m_leftTop(left, top), m_rightBottom(right, bottom)
 	{
-		if (!(left > right || bottom > top)) {
+		if (left > right || bottom > top) {
 			throw invalid_argument("Rectangle shapes are wrong!");
 		}
 	}
