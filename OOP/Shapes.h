@@ -117,7 +117,9 @@ class Rect : public Shape
 public:
 	Rect(double left, double top, double right, double bottom) : Shape(), m_leftTop(left, top), m_rightBottom(right, bottom)
 	{
-		assert(left < right && bottom < top);
+		if (!(left > right || bottom > top)) {
+			throw invalid_argument("Rectangle shapes are wrong!");
+		}
 	}
 
 	string ShapeName() const override { return "Rect"; }
@@ -230,7 +232,9 @@ public:
 		return true;
 	}
 	void AddPoint(const Point & p) { 
-		assert(CanBeAdded(p));
+		if (!CanBeAdded(p)) {
+			throw invalid_argument("This point can't be added because polygon should be convex!");
+		}
 		m_points.PushBack(p); 
 	}
 

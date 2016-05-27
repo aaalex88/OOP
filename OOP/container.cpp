@@ -65,7 +65,9 @@ void Container<T>::PushBack(T val)
 template<typename T>
 T Container<T>::PopFront()
 {
-	assert(m_size != 0);
+	if (m_size == 0) {
+		throw domain_error("Deleting element from empty container!");
+	}
 
 	m_size--;
 
@@ -87,7 +89,9 @@ T Container<T>::PopFront()
 template<typename T>
 T Container<T>::PopBack()
 {
-	assert(m_size != 0);
+	if (m_size == 0) {
+		throw domain_error("Deleting element from empty container!");
+	}
 
 	m_size--;
 
@@ -110,7 +114,9 @@ T Container<T>::PopBack()
 template<typename T>
 T Container<T>::operator[](size_t index) const
 {
-	assert(index < m_size);
+	if (index >= m_size) {
+		throw out_of_range("Access element out of range!");
+	}
 
 	List * l = m_first;
 
@@ -124,7 +130,9 @@ T Container<T>::operator[](size_t index) const
 template<typename T>
 T Container<T>::First() const
 {
-	assert(m_first != nullptr);
+	if (m_first == nullptr) {
+		throw domain_error("Accessing element of empty container!");
+	}
 
 	return m_first->val;
 }
@@ -132,7 +140,9 @@ T Container<T>::First() const
 template<typename T>
 T Container<T>::Last() const
 {
-	assert(m_last != nullptr);
+	if (m_last == nullptr) {
+		throw domain_error("Accessing element of empty container!");
+	}
 
 	return m_last->val;
 }
@@ -162,7 +172,6 @@ inline void Container<T>::Foreach(Command com) const
 template<typename T>
 size_t Container<T>::Size() const
 {
-	// TODO assert length!
 	return m_size;
 }
 
